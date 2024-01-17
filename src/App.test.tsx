@@ -18,9 +18,18 @@ describe("App Component", () => {
   it("should change message on button click", () => {
     render(<App />);
     screen.getByText("Let's learn more about testing in React");
+
     const button = screen.getByText(/change message/i);
     fireEvent.click(button);
     screen.getByText(/new message!/i);
+
+    const oldMessage = screen.queryByText(
+      "Let's learn more about testing in React"
+    );
+
+    // two ways to verify is the oldMessage is in the page or not
+    expect(oldMessage).toBeNull(); // first one (my favorite)
+    // expect(oldMessage).not.toBeInTheDocument(); // second onde
   });
 });
 
